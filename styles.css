@@ -43,9 +43,12 @@ body {
   background: #ffeb3b;
   border: 3px solid #333;
   border-radius: 20px;
-  padding: 15px;
-  margin-left: 30%;
+  padding: 15px 25px;
+  margin-left: 20%;
   box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+  transition: all 0.3s ease; /* Animation fluide */
+  min-width: 250px;
+  width: fit-content;
 }
 
 .question-bubble::before {

@@ -13,25 +13,25 @@ const questions = [
 ];
 
 const answers = [
-  "Commencer par l'aménagement d'un conteneur. Et terminer par la livraison de plusieurs représentations (plan, vue 3D, maquette, etc..).",
+  "Je regrette mais tu es capable de répondre à cette question par toi même",
   "1. Réunion | 2. Ébauche | 3. Plan | 4. Vérification | 5. Présentation | 6. Réunion | 7. Choix terrain | 8. 3D | 9. Réunion finale",
-  "Fournir plusieurs représentations du projet de construction (plan, vue 3D, maquette, etc..)",
+  "Je regrette mais tu es capable de répondre à cette question par toi même",
   "Aucun travaux de construction. Seulement imaginer le projet et réaliser des représentations  (plans, vue 3D, maquettes etc..)",
   "les dimensions d'un conteneurs\n  ce que le logement et la résidence doivent avoir et comment tout doit fonctionner\n  les outils informatiques et le materiel nécessaires",
   "OUI !!! Le maire nous donnera les détails supplémentaires pendant les réunions.",
   "9 tâches",
-  "En repertoriant toutes les tâches à accomplir dans un diagramme de GANTT.",
+  "Je regrette mais tu es capable de répondre à cette question par toi même",
   "Durée des tâches en nombre d'heure de cours (9h)\n  1.demi | 2.une | 3.deux| 4.demi | 5.demi | 6.demi | 7.une | 8.deux | 9.une",
   "2.Ebauche | 3.Plan d'aménagement | 8.Implantation géographique 3D"
 ];
 
 const tasks = [
-  "1. Réunion 'exigences et description fonctionnelle'\n",
+  "1. Réunion 'exigences et description fonctionnelle'",
   "2. Ébauche main levée",
   "3. Plan informatique",
   "4. Vérification conformité",
   "5. Présentation au Maire", 
-  "6. Réunion solutions",
+  "6. Réunion 'Résidence Étudiante : solutions'",
   "7. Choix du terrain",
   "8. Modélisation 3D",
   "9. Présentation finale"
