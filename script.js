@@ -14,27 +14,27 @@ const questions = [
 
 const answers = [
   "Je regrette mais tu es capable de répondre à cette question par toi même",
-  "1. Réunion | 2. Ébauche | 3. Plan | 4. Vérification | 5. Présentation | 6. Réunion | 7. Choix terrain | 8. 3D | 9. Réunion finale",
+  "(1)Réunion, (2)Ébauche, (3)Plan, (4)Vérification, (5)Présentation, (6)Réunion, (7)Choix terrain, (8)3D, (9)Réunion finale",
   "Je regrette mais tu es capable de répondre à cette question par toi même",
   "Aucun travaux de construction. Seulement imaginer le projet et réaliser des représentations (plans, vue 3D, maquettes etc..)",
   "les dimensions d'un conteneurs<br>ce que le logement et la résidence doivent avoir et comment tout doit fonctionner<br>les outils informatiques et le materiel nécessaires",
   "OUI !!! Le maire nous donnera les détails supplémentaires pendant les réunions.",
   "9 tâches",
   "Je regrette mais tu es capable de répondre à cette question par toi même",
-  "Durée des tâches en nombre d'heure de cours (9h)<br>1.demi | 2.une | 3.deux| 4.demi | 5.demi | 6.demi | 7.une | 8.deux | 9.une",
-  "2.Ebauche | 3.Plan d'aménagement | 8.Implantation géographique 3D"
+  "Durée des tâches en nombre d'heure (9h)<br>(1)30min, (2)1h, (3)2h, (4)30min, (5)30min, (6)30min, (7)1h, (8)2h, (9)1h",
+  "(2)Ebauche, (3)Plan d'aménagement, (8)Implantation géographique 3D"
 ];
 
 const tasks = [
-  "1. Réunion 'exigences et description fonctionnelle'<br>discuter de ce que le logement doit avoir et comment tout doit fonctionner",
-  "2. Ebauche<br>dessiner à la main une ébauche et la montrer au maire",
-  "3. Plan d'aménagement<br>réaliser l'aménagement avec un outil de description informatique",
-  "4. Vérification<br>Vérifier qu'il n'y ait aucun écart entre le travail réalisé et les exigences",
-  "5. Présentation<br>Présenter au maire son plan d'aménagement", 
-  "6. Réunion 'Résidence Étudiante : solutions'<br>Définir les bases de notre résidence étudiante",
-  "7. Choix du terrain<br>Utiliser des cartes géographiques, des maquettes et Internet pour choisir le terrain",
-  "8. Implantation géographique 3D<br>Implanter la résidence sur le terrain avec un outil de modélisation 3D",
-  "9. Réunion 'Présentation finale'<br>Présenter au maire sa réalisation finale"
+  "<b>Réunion 'exigences et description fonctionnelle' </b>:<br>discuter de ce que le logement doit avoir et comment tout doit fonctionner",
+  "<b>Ebauche</b> :<br>dessiner à la main une ébauche et la montrer au maire",
+  "<b>Plan d'aménagement</b> :<br>réaliser l'aménagement avec un outil de description informatique",
+  "<b>Vérification</b> :<br>Vérifier qu'il n'y ait aucun écart entre le travail réalisé et les exigences",
+  "<b>Présentation</b> :<br>Présenter au maire son plan d'aménagement", 
+  "<b>Réunion 'Résidence Étudiante - solutions' </b>:<br>Définir les bases de notre résidence étudiante",
+  "<b>Choix du terrain</b> :<br>Utiliser des cartes géographiques, des maquettes et Internet pour choisir le terrain",
+  "<b>Implantation géographique 3D</b> :<br>Implanter la résidence sur le terrain avec un outil de modélisation 3D",
+  "<b>Réunion 'Présentation finale' </b>:<br>Présenter au maire sa réalisation finale"
 ];
 
 // Initialisation
@@ -79,8 +79,8 @@ function showAnswer(index) {
 function showTasks() {
   dialogueBox.innerHTML = `
     <p><strong>Liste des tâches :</strong></p>
-    <ul>
-      ${tasks.map(task => `${task}`).join('')}
-    </ul>
+    <ol>
+      ${tasks.map(task => `<li style="margin-left: 0; padding-left: 0; text-align: left; list-style-position: outside;">${task}</li>`).join('')}
+    </ol>
   `;
 }
