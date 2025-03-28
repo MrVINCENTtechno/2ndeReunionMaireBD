@@ -38,72 +38,49 @@ const tasks = [
 ];
 
 // Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-  const questionsContainer = document.getElementById('questions-container');
-  const responseBubble = document.getElementById('response-bubble');
-  const responseContent = document.getElementById('response-content');
-  const mayorGif = document.getElementById('mayor-gif');
-  const tasksPopup = document.getElementById('tasks-popup');
-  const tasksList = document.getElementById('tasks-list');
-  const closePopupBtn = document.querySelector('.close-popup');
+const questionsContainer = document.getElementById('questions-container');
+const dialogueBox = document.getElementById('dialogue-box');
+const mayorGif = document.getElementById('mayor-gif');
 
-  // Création des questions
-  questions.forEach((question, index) => {
-    const bubble = document.createElement('div');
-    bubble.className = 'question-bubble';
-    bubble.innerHTML = `<p class="question-text">${question}</p>`;
-    bubble.addEventListener('click', () => showAnswer(index));
-    questionsContainer.appendChild(bubble);
-  });
-
-  // Fonction pour afficher les réponses
-  function showAnswer(index) {
-    mayorGif.src = 'maire-speak.gif';
-    responseBubble.classList.remove('hidden');
-    
-    if (seul[index]) {
-      responseContent.innerHTML = 'Je regrette mais tu es capable de répondre à cette question par toi même.';
-    } else if (index === 1) {
-      responseContent.innerHTML = `
-        <p>${answers[index]}</p>
-        <button class="show-tasks-btn">Voir la liste complète des tâches</button>
-      `;
-      document.querySelector('.show-tasks-btn').addEventListener('click', showTasks);
-    } else {
-      responseContent.innerHTML = answers[index].replace(/<br>/g, '<br>');
-    }
-
-    setTimeout(() => {
-      mayorGif.src = 'maire-silent.gif';
-      responseBubble.classList.add('hidden');
-    }, 8000);
-  }
-
-  // Fonction pour afficher le popup des tâches
-  function showTasks() {
-    tasksList.innerHTML = tasks.map(task => 
-      `<li>${task.replace(/<br>/g, '<br>')}</li>`
-    ).join('');
-    
-    tasksPopup.classList.add('active');
-    mayorGif.src = 'maire-speak.gif';
-    
-    setTimeout(() => {
-      mayorGif.src = 'maire-silent.gif';
-    }, 2000);
-  }
-
-  // Fermer le popup
-  closePopupBtn.addEventListener('click', () => {
-    tasksPopup.classList.remove('active');
-  });
-
-  // Fermer en cliquant à l'extérieur
-  tasksPopup.addEventListener('click', (e) => {
-    if (e.target === tasksPopup) {
-      tasksPopup.classList.remove('active');
-    }
-  });
+// Créer les boutons de questions
+questions.forEach((question, index) => {
+  const btn = document.createElement('button');
+  btn.className = 'question-btn';
+  btn.textContent = question;
+  btn.onclick = () => showAnswer(index);
+  questionsContainer.appendChild(btn);
 });
 
-const seul = [true, false, false, false, false, false, false, false, false, false];
+// ... (conserve les mêmes données questions/answers/tasks)
+
+function showAnswer(index) {
+  // Démarrer l'animation
+  const mayorGif = document.getElementById('mayor-gif');
+  mayorGif.src = 'maire-speak.gif'; // Charger le GIF parlant
+  
+  // Afficher la réponse
+  if (index === 1) {
+    dialogueBox.innerHTML = `
+      <p><strong>Réponse :</strong> ${answers[index]}</p>
+      <button class="task-btn" onclick="showTasks()">Voir détails des tâches</button>
+    `;
+  } else {
+    dialogueBox.innerHTML = `<p><strong>Réponse :</strong> ${answers[index]}</p>`;
+  }
+  
+  // Maintenir l'animation pendant 3 secondes
+  setTimeout(() => {
+    mayorGif.src = 'maire-silent.gif'; // Revenir au GIF silencieux
+  }, 8000);
+}
+
+// ... (conserve showTasks() inchangé)
+
+function showTasks() {
+  dialogueBox.innerHTML = `
+    <p><strong>Liste des tâches :</strong></p>
+    <ul>
+      ${tasks.map(task => `${task}`).join('')}
+    </ul>
+  `;
+}
