@@ -42,6 +42,12 @@ const questionsContainer = document.getElementById('questions-container');
 const dialogueBox = document.getElementById('dialogue-box');
 const mayorGif = document.getElementById('mayor-gif');
 
+// Récupérez les éléments du popup
+const tasksPopup = document.getElementById('tasks-popup');
+const tasksList = document.getElementById('tasks-list');
+const closePopupBtn = document.querySelector('.close-popup');
+
+
 // Créer les boutons de questions
 questions.forEach((question, index) => {
   const btn = document.createElement('button');
@@ -75,7 +81,7 @@ function showAnswer(index) {
 }
 
 // ... (conserve showTasks() inchangé)
-
+/*
 function showTasks() {
   dialogueBox.innerHTML = `
     <p><strong>Liste des tâches :</strong></p>
@@ -84,3 +90,23 @@ function showTasks() {
     </ul>
   `;
 }
+*/
+// Fonction pour afficher les tâches dans le popup
+function showTasks() {
+  // Remplir la liste
+  tasksList.innerHTML = tasks.map(task => `<li>${task}</li>`).join('');
+  
+  // Afficher le popup
+  tasksPopup.classList.remove('hidden');
+  
+  // Mettre à jour le GIF du maire
+  mayorGif.src = 'maire-speak.gif';
+  setTimeout(() => {
+    mayorGif.src = 'maire-silent.gif';
+  }, 2000);
+}
+
+// Fermer le popup
+closePopupBtn.addEventListener('click', () => {
+  tasksPopup.classList.add('hidden');
+});
