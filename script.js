@@ -38,110 +38,49 @@ const tasks = [
 ];
 
 // Initialisation
-// Initialisation des éléments DOM
 const questionsContainer = document.getElementById('questions-container');
-const responseBubble = document.getElementById('response-bubble');
-const responseContent = document.getElementById('response-content');
+const dialogueBox = document.getElementById('dialogue-box');
 const mayorGif = document.getElementById('mayor-gif');
-const questionsColumn = document.querySelector('.questions-column');
 
-// Création des bulles de questions
+// Créer les boutons de questions
 questions.forEach((question, index) => {
-  const bubble = document.createElement('div');
-  bubble.className = 'question-bubble';
-  bubble.innerHTML = `<p class="question-text">${index + 1}. ${question}</p>`;
-  bubble.addEventListener('click', () => showResponse(index));
-  questionsContainer.appendChild(bubble);
+  const btn = document.createElement('button');
+  btn.className = 'question-btn';
+  btn.textContent = question;
+  btn.onclick = () => showAnswer(index);
+  questionsContainer.appendChild(btn);
 });
 
-// Fonction pour afficher les réponses
-function showResponse(index) {
-  // Animation du maire
-  mayorGif.src = 'maire-speak.gif';
-  mayorGif.classList.add('shake');
-  
-  // Affichage de la réponse
-  responseBubble.classList.remove('hidden');
-  
-  if (seul[index]) {
-    responseContent.innerHTML = 'Je regrette mais tu es capable de répondre à cette question par toi même.';
-  } else if (index === 1) {
-    responseContent.innerHTML = `
-      <p>${answers[index]}</p>
-      <button class="show-tasks-btn">Voir la liste complète des tâches</button>
-    `;
-    document.querySelector('.show-tasks-btn').addEventListener('click', showTasks);
-  } else {
-    responseContent.innerHTML = answers[index];
-  }
+// ... (conserve les mêmes données questions/answers/tasks)
 
-  // Réinitialisation après 5 secondes
+function showAnswer(index) {
+  // Démarrer l'animation
+  const mayorGif = document.getElementById('mayor-gif');
+  mayorGif.src = 'maire-speak.gif'; // Charger le GIF parlant
+  
+  // Afficher la réponse
+  if (index === 1) {
+    dialogueBox.innerHTML = `
+      <p><strong>Réponse :</strong> ${answers[index]}</p>
+      <button class="task-btn" onclick="showTasks()">Voir détails des tâches</button>
+    `;
+  } else {
+    dialogueBox.innerHTML = `<p><strong>Réponse :</strong> ${answers[index]}</p>`;
+  }
+  
+  // Maintenir l'animation pendant 3 secondes
   setTimeout(() => {
-    mayorGif.src = 'maire-silent.gif';
-    mayorGif.classList.remove('shake');
-    responseBubble.classList.add('hidden');
-  }, 5000);
+    mayorGif.src = 'maire-silent.gif'; // Revenir au GIF silencieux
+  }, 8000);
 }
 
-// Fonction pour afficher les tâches
+// ... (conserve showTasks() inchangé)
+
 function showTasks() {
-  responseContent.innerHTML = `
-    <p><strong>Liste complète des tâches :</strong></p>
-    <ul class="tasks-list">
+  dialogueBox.innerHTML = `
+    <p><strong>Liste des tâches :</strong></p>
+    <ul>
       ${tasks.map(task => `<li>${task}</li>`).join('')}
     </ul>
   `;
 }
-
-// Gestion du redimensionnement de la colonne
-let isResizing = false;
-let lastX = 0;
-let startWidth = 0;
-
-const resizeHandle = document.createElement('div');
-resizeHandle.className = 'resize-handle';
-questionsColumn.appendChild(resizeHandle);
-
-// Événements pour le redimensionnement
-resizeHandle.addEventListener('mousedown', (e) => {
-  isResizing = true;
-  lastX = e.clientX;
-  startWidth = questionsColumn.offsetWidth;
-  document.body.style.cursor = 'col-resize';
-  document.body.style.userSelect = 'none';
-  e.preventDefault();
-});
-
-document.addEventListener('mousemove', (e) => {
-  if (!isResizing) return;
-  
-  const dx = e.clientX - lastX;
-  const newWidth = startWidth + dx;
-  
-  // Limites de redimensionnement
-  const minWidth = 250;
-  const maxWidth = window.innerWidth * 0.5;
-  
-  if (newWidth >= minWidth && newWidth <= maxWidth) {
-    questionsColumn.style.width = `${newWidth}px`;
-  }
-});
-
-document.addEventListener('mouseup', () => {
-  if (isResizing) {
-    isResizing = false;
-    document.body.style.cursor = '';
-    document.body.style.userSelect = '';
-  }
-});
-
-// Animation de secousse
-function animateGif() {
-  mayorGif.classList.add('shake');
-  setTimeout(() => {
-    mayorGif.classList.remove('shake');
-  }, 500);
-}
-
-// Initialisation
-responseBubble.classList.add('hidden');

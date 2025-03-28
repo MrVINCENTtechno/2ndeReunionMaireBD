@@ -1,4 +1,4 @@
-/* Reset et styles de base */
+/* Reset de base */
 * {
   margin: 0;
   padding: 0;
@@ -6,40 +6,96 @@
 }
 
 body {
-  font-family: 'Comic Sans MS', cursive;
+  font-family: 'Comic Sans MS', 'Marker Felt', sans-serif;
   background-color: #e6f2ff;
-  overflow: hidden;
+  color: #333;
+  line-height: 1.6;
 }
 
-/* Conteneur principal */
-.comic-container {
+/* Layout principal */
+.comic-page {
   display: flex;
-  height: 100vh;
-  position: relative;
-}
-
-/* Colonne des questions - Redimensionnable */
-.questions-column {
-  width: 350px; /* Largeur initiale */
-  min-width: 250px;
-  max-width: 50vw;
-  background-color: #fff8e1;
+  min-height: 100vh;
   padding: 20px;
+}
+
+/* Colonne des questions (droite) - ÉLARGIE */
+.questions-column {
+  width: 45%; /* Colonne plus large */
+  min-width: 400px; /* Largeur minimale garantie */
+  background-color: #fff8e1;
+  padding: 30px;
+  border-right: 4px dashed #333;
   overflow-y: auto;
-  border-right: 3px dashed #333;
-  resize: horizontal;
-  overflow: hidden;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
 }
 
-/* Poignée de redimensionnement personnalisée */
-.questions-column::-webkit-resizer {
-  background-color: #ff5722;
-  width: 15px;
-  height: 100%;
+.comic-title {
+  font-family: 'Bangers', cursive;
+  color: #ff5722;
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 3px 3px 0 #ffeb3b;
+  letter-spacing: 2px;
 }
 
-/* Zone du maire */
+/* Conteneur des questions */
+.questions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Bulles de questions - STYLE ÉLARGI */
+.question-bubble {
+  position: relative;
+  background: #ffeb3b;
+  border: 3px solid #333;
+  border-radius: 20px;
+  padding: 18px 25px;
+  width: 100%; /* Prend toute la largeur disponible */
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.question-bubble:hover {
+  transform: translateY(-3px);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+}
+
+.question-bubble::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border-right: 15px solid #333;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.question-bubble::after {
+  content: '';
+  position: absolute;
+  left: -11px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border-right: 15px solid #ffeb3b;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.question-text {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* Section du maire (gauche) */
 .mayor-scene {
   flex: 1;
   display: flex;
@@ -47,30 +103,15 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  position: relative;
 }
 
 .mayor-gif {
-  max-height: 70vh;
+  max-height: 65vh;
   max-width: 100%;
   border: 4px solid #333;
   border-radius: 15px;
   box-shadow: 10px 10px 0 rgba(0,0,0,0.2);
-}
-
-/* Bulles de questions */
-.question-bubble {
-  background: #ffeb3b;
-  border: 3px solid #333;
-  border-radius: 15px;
-  padding: 15px;
-  margin-bottom: 15px;
-  cursor: pointer;
-  transition: transform 0.2s;
-  word-wrap: break-word;
-}
-
-.question-bubble:hover {
-  transform: translateX(5px);
 }
 
 /* Bulle de réponse */
@@ -79,26 +120,104 @@ body {
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
+  width: 80%;
+  max-width: 500px;
   background: white;
   border: 3px solid #333;
   border-radius: 20px;
   padding: 20px;
-  max-width: 80%;
-  box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+  box-shadow: 7px 7px 0 rgba(0,0,0,0.2);
   z-index: 10;
 }
 
-/* Pour les écrans étroits */
-@media (max-width: 768px) {
-  .comic-container {
+.bubble-tail {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #333;
+}
+
+.bubble-content {
+  font-size: 1.2rem;
+}
+
+.tasks-list {
+  margin-top: 15px;
+  padding-left: 25px;
+}
+
+.tasks-list li {
+  margin-bottom: 10px;
+}
+
+.show-tasks-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-top: 15px;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #333;
+  transition: all 0.2s;
+}
+
+.show-tasks-btn:hover {
+  background: #3e8e41;
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .comic-page {
     flex-direction: column;
   }
   
   .questions-column {
-    width: 100% !important;
-    max-width: 100%;
-    resize: none;
+    width: 100%;
+    min-width: unset;
     border-right: none;
-    border-bottom: 3px dashed #333;
+    border-bottom: 4px dashed #333;
+  }
+  
+  .mayor-gif {
+    max-height: 50vh;
+  }
+  
+  .question-bubble::before,
+  .question-bubble::after {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .comic-title {
+    font-size: 2rem;
+  }
+  
+  .questions-column {
+    padding: 15px;
+  }
+  
+  .question-bubble {
+    padding: 15px;
   }
 }
