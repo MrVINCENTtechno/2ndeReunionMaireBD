@@ -21,7 +21,7 @@ body {
 
 /* Colonne des questions (droite) - ÉLARGIE */
 .questions-column {
-  width: 45%; /* Colonne plus large */
+  width: 60%; /* Colonne plus large */
   min-width: 400px; /* Largeur minimale garantie */
   background-color: #fff8e1;
   padding: 30px;
