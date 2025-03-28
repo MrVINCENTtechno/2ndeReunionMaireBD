@@ -1,0 +1,167 @@
+/* Style BD authentique */
+body {
+  background-color: #f0f9ff;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Comic Neue', cursive;
+}
+
+.comic-page {
+  display: flex;
+  height: 100vh;
+}
+
+/* Colonne des questions */
+.questions-column {
+  width: 45%;
+  background-color: #fff;
+  padding: 20px;
+  overflow-y: auto;
+  border-right: 4px dashed #333;
+}
+
+.comic-title {
+  font-family: 'Bangers', cursive;
+  color: #ff5722;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 3px 3px 0 #ffeb3b;
+  letter-spacing: 1px;
+}
+
+.questions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Bulles des questions */
+.question-bubble {
+  position: relative;
+  background: #ffeb3b;
+  border: 3px solid #333;
+  border-radius: 20px;
+  padding: 15px;
+  margin-left: 30%;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+}
+
+.question-bubble::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border-right: 15px solid #333;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.question-bubble::after {
+  content: '';
+  position: absolute;
+  left: -11px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border-right: 15px solid #ffeb3b;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.question-text {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Scène du maire */
+.mayor-scene {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: #e3f2fd;
+}
+
+.mayor-gif {
+  max-height: 70vh;
+  max-width: 90%;
+  filter: drop-shadow(10px 10px 0 rgba(0,0,0,0.2));
+}
+
+/* Bulle de réponse */
+.response-bubble {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 500px;
+  background: white;
+  border: 3px solid #333;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 7px 7px 0 rgba(0,0,0,0.2);
+}
+
+.bubble-tail {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #333;
+}
+
+.bubble-content {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.tasks-list {
+  padding-left: 20px;
+}
+
+.tasks-list li {
+  margin-bottom: 8px;
+}
+
+.show-tasks-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  margin-top: 10px;
+  font-family: 'Comic Neue', cursive;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #333;
+}
+
+/* Animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Ajoutez cette règle */
+.hidden {
+  display: none;
+}
+
+#mayor-gif {
+  transition: opacity 0.3s;
+}
