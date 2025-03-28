@@ -160,7 +160,7 @@ body {
   border-radius: 5px;
   font-family: 'Comic Neue', cursive;
   font-size: 1rem;
-  cursor: pointer;
+  /*cursor: pointer;*/
   transition: all 0.2s;
 }
 

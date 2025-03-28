@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       mayorGif.src = 'maire-silent.gif';
       responseBubble.classList.add('hidden');
-    }, 5000);
+    }, 8000);
   }
 
   // Fonction pour afficher le popup des tâches
