@@ -1,4 +1,4 @@
-/* Reset de base */
+/* Reset et styles de base */
 * {
   margin: 0;
   padding: 0;
@@ -6,108 +6,76 @@
 }
 
 body {
-  font-family: 'Comic Sans MS', 'Marker Felt', sans-serif;
+  font-family: 'Comic Neue', cursive;
   background-color: #e6f2ff;
   color: #333;
   line-height: 1.6;
 }
 
-/* Layout principal */
-.comic-page {
-  display: flex;
-  min-height: 100vh;
+.comic-container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-}
-
-/* Colonne des questions (droite) - ÉLARGIE */
-.questions-column {
-  width: 60%; /* Colonne plus large */
-  min-width: 400px; /* Largeur minimale garantie */
-  background-color: #fff8e1;
-  padding: 30px;
-  border-right: 4px dashed #333;
-  overflow-y: auto;
-  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
 }
 
 .comic-title {
   font-family: 'Bangers', cursive;
   color: #ff5722;
-  font-size: 2.8rem;
   text-align: center;
+  font-size: 2.8rem;
   margin-bottom: 30px;
   text-shadow: 3px 3px 0 #ffeb3b;
   letter-spacing: 2px;
 }
 
-/* Conteneur des questions */
-.questions-container {
+.main-content {
   display: flex;
-  flex-direction: column;
   gap: 20px;
 }
 
-/* Bulles de questions - STYLE ÉLARGI */
+/* Colonne des questions */
+.questions-column {
+  width: 45%;
+  min-width: 350px;
+  background-color: #fff8e1;
+  padding: 25px;
+  border-radius: 15px;
+  border: 3px solid #333;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+}
+
+.questions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .question-bubble {
-  position: relative;
   background: #ffeb3b;
   border: 3px solid #333;
-  border-radius: 20px;
-  padding: 18px 25px;
-  width: 100%; /* Prend toute la largeur disponible */
-  box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
+  border-radius: 15px;
+  padding: 15px;
   cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
 }
 
 .question-bubble:hover {
   transform: translateY(-3px);
-  box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
 }
 
-.question-bubble::before {
-  content: '';
-  position: absolute;
-  left: -15px;
-  top: 20px;
-  width: 0;
-  height: 0;
-  border-right: 15px solid #333;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-}
-
-.question-bubble::after {
-  content: '';
-  position: absolute;
-  left: -11px;
-  top: 20px;
-  width: 0;
-  height: 0;
-  border-right: 15px solid #ffeb3b;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-}
-
-.question-text {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin: 0;
-}
-
-/* Section du maire (gauche) */
+/* Zone du maire */
 .mayor-scene {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
   position: relative;
 }
 
 .mayor-gif {
-  max-height: 65vh;
+  max-height: 60vh;
   max-width: 100%;
   border: 4px solid #333;
   border-radius: 15px;
@@ -130,153 +98,92 @@ body {
   z-index: 10;
 }
 
-.bubble-tail {
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 15px solid #333;
-}
-
 .bubble-content {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
-.tasks-list {
-  margin-top: 15px;
-  padding-left: 25px;
+/* Popup des tâches */
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.tasks-list li {
+.popup-container.active {
+  display: flex;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  border: 3px solid #333;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.popup-content h3 {
+  color: #ff5722;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+#tasks-list {
+  padding-left: 20px;
+}
+
+#tasks-list li {
   margin-bottom: 10px;
+  white-space: pre-line;
 }
 
-.show-tasks-btn {
-  background: #4CAF50;
+.close-popup {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 25px;
+  background: #ff5722;
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 10px 15px;
-  margin-top: 15px;
-  font-family: inherit;
-  font-weight: bold;
+  font-family: 'Comic Neue', cursive;
+  font-size: 1rem;
   cursor: pointer;
-  box-shadow: 3px 3px 0 #333;
   transition: all 0.2s;
 }
 
-.show-tasks-btn:hover {
-  background: #3e8e41;
-  transform: translateY(-2px);
+.close-popup:hover {
+  background: #e64a19;
 }
 
-/* Animations */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-
-.shake {
-  animation: shake 0.5s ease-in-out;
+.hidden {
+  display: none;
 }
 
 /* Responsive */
-@media (max-width: 1200px) {
-  .comic-page {
+@media (max-width: 900px) {
+  .main-content {
     flex-direction: column;
   }
   
   .questions-column {
     width: 100%;
-    min-width: unset;
-    border-right: none;
-    border-bottom: 4px dashed #333;
+    min-width: auto;
   }
   
   .mayor-gif {
     max-height: 50vh;
   }
-  
-  .question-bubble::before,
-  .question-bubble::after {
-    display: none;
-  }
-}
-
-@media (max-width: 600px) {
-  .comic-title {
-    font-size: 2rem;
-  }
-  
-  .questions-column {
-    padding: 15px;
-  }
-  
-  .question-bubble {
-    padding: 15px;
-  }
-
-    /* Style du popup */
-    .popup-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    
-    .popup-content {
-      background: #fff;
-      padding: 25px;
-      border-radius: 15px;
-      border: 3px solid #333;
-      max-width: 80%;
-      max-height: 80vh;
-      overflow-y: auto;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-    
-    .popup-content h3 {
-      color: #ff5722;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-    
-    .popup-content ul {
-      padding-left: 20px;
-      list-style-type: none;
-    }
-    
-    .popup-content li {
-      margin-bottom: 10px;
-      font-size: 1.1em;
-      white-space: pre-line;
-    }
-    
-    .close-popup {
-      display: block;
-      margin: 20px auto 0;
-      padding: 8px 20px;
-      background: #ff5722;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: 'Comic Sans MS', cursive;
-    }
-    
-    .hidden {
-      display: none;
-    }
-
 }

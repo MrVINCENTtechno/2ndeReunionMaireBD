@@ -16,93 +16,94 @@ const answers = [
   "Je regrette mais tu es capable de répondre à cette question par toi même",
   "1. Réunion | 2. Ébauche | 3. Plan | 4. Vérification | 5. Présentation | 6. Réunion | 7. Choix terrain | 8. 3D | 9. Réunion finale",
   "Je regrette mais tu es capable de répondre à cette question par toi même",
-  "Aucun travaux de construction. Seulement imaginer le projet et réaliser des représentations  (plans, vue 3D, maquettes etc..)",
-  "les dimensions d'un conteneurs<br>  ce que le logement et la résidence doivent avoir et comment tout doit fonctionner<br>  les outils informatiques et le materiel nécessaires",
+  "Aucun travaux de construction. Seulement imaginer le projet et réaliser des représentations (plans, vue 3D, maquettes etc..)",
+  "les dimensions d'un conteneurs<br>ce que le logement et la résidence doivent avoir et comment tout doit fonctionner<br>les outils informatiques et le materiel nécessaires",
   "OUI !!! Le maire nous donnera les détails supplémentaires pendant les réunions.",
   "9 tâches",
   "Je regrette mais tu es capable de répondre à cette question par toi même",
-  "Durée des tâches en nombre d'heure de cours (9h)<br>  1.demi | 2.une | 3.deux| 4.demi | 5.demi | 6.demi | 7.une | 8.deux | 9.une",
+  "Durée des tâches en nombre d'heure de cours (9h)<br>1.demi | 2.une | 3.deux| 4.demi | 5.demi | 6.demi | 7.une | 8.deux | 9.une",
   "2.Ebauche | 3.Plan d'aménagement | 8.Implantation géographique 3D"
 ];
 
 const tasks = [
-  "1. Réunion 'exigences et description fonctionnelle'<br>",
-  "2. Ebauche<BR>dessiner à la main une ébauche et la montrer au maire",
-  "3. Plan d'aménagement<BR>réaliser l'ammenagement avec un outil de description informatique",
-  "4. Vérification<BR>Vérifier qu'il n'y ait aucun écart entre le travail réalisé et les exigences et la description fonctionnelle (tâche N°1)",
-  "5. Présentation<BR>Présenter au maire son plan d'aménagement", 
-  "6. Réunion 'Résidence Étudiante : solutions'<BR>Définir les bases de notre résidence étudiante : nombre, orientation, implantation et rendu de notre présentation finale",
-  "7. Choix du terrain<BR>Utiliser des cartes géographiques, des maquettes et Internet pour choisir le terrain de la résidence",
-  "8. Implantation géographique 3D<BR>Implanter la résidence sur le terrain avec un outil de modélisation 3D",
-  "9. Réunion 'Présentation finale'<BR>"
+  "1. Réunion 'exigences et description fonctionnelle'<br>discuter de ce que le logement doit avoir et comment tout doit fonctionner",
+  "2. Ebauche<br>dessiner à la main une ébauche et la montrer au maire",
+  "3. Plan d'aménagement<br>réaliser l'aménagement avec un outil de description informatique",
+  "4. Vérification<br>Vérifier qu'il n'y ait aucun écart entre le travail réalisé et les exigences",
+  "5. Présentation<br>Présenter au maire son plan d'aménagement", 
+  "6. Réunion 'Résidence Étudiante : solutions'<br>Définir les bases de notre résidence étudiante",
+  "7. Choix du terrain<br>Utiliser des cartes géographiques, des maquettes et Internet pour choisir le terrain",
+  "8. Implantation géographique 3D<br>Implanter la résidence sur le terrain avec un outil de modélisation 3D",
+  "9. Réunion 'Présentation finale'<br>Présenter au maire sa réalisation finale"
 ];
 
 // Initialisation
-const questionsContainer = document.getElementById('questions-container');
-const dialogueBox = document.getElementById('dialogue-box');
-const mayorGif = document.getElementById('mayor-gif');
-
-// Récupérez les éléments du popup
-const tasksPopup = document.getElementById('tasks-popup');
-const tasksList = document.getElementById('tasks-list');
-const closePopupBtn = document.querySelector('.close-popup');
-
-
-// Créer les boutons de questions
-questions.forEach((question, index) => {
-  const btn = document.createElement('button');
-  btn.className = 'question-btn';
-  btn.textContent = question;
-  btn.onclick = () => showAnswer(index);
-  questionsContainer.appendChild(btn);
-});
-
-// ... (conserve les mêmes données questions/answers/tasks)
-function showAnswer(index) {
-  // Démarrer l'animation
+document.addEventListener('DOMContentLoaded', () => {
+  const questionsContainer = document.getElementById('questions-container');
+  const responseBubble = document.getElementById('response-bubble');
+  const responseContent = document.getElementById('response-content');
   const mayorGif = document.getElementById('mayor-gif');
-  mayorGif.src = 'maire-speak.gif'; // Charger le GIF parlant
-  
-  // Afficher la réponse
-  if (index === 1) {
-    dialogueBox.innerHTML = `
-    <p><strong>Réponse :</strong> ${answers[index]}</p>
-    <button class="show-tasks-btn">Voir la liste complète des tâches</button>
-  `;
-  // Réattacher l'événement à chaque clic
-  document.querySelector('.show-tasks-btn').addEventListener('click', showTasks);
-  } else {
-    dialogueBox.innerHTML = `<p><strong>Réponse :</strong> ${answers[index]}</p>`;
-  }
-  
-  // Maintenir l'animation pendant 3 secondes
-  setTimeout(() => {
-    mayorGif.src = 'maire-silent.gif'; // Revenir au GIF silencieux
-  }, 8000);
-}
+  const tasksPopup = document.getElementById('tasks-popup');
+  const tasksList = document.getElementById('tasks-list');
+  const closePopupBtn = document.querySelector('.close-popup');
 
-// Fonction pour afficher les tâches dans le popup
-function showTasks() {
-  // Formatage des tâches avec gestion des <br>
-  const formattedTasks = tasks.map(task => {
-    // Remplacer <br> par des sauts de ligne réels
-    const taskText = task.replace(/<br>/gi, '\n');
-    return `<li>${taskText}</li>`;
+  // Création des questions
+  questions.forEach((question, index) => {
+    const bubble = document.createElement('div');
+    bubble.className = 'question-bubble';
+    bubble.innerHTML = `<p class="question-text">${question}</p>`;
+    bubble.addEventListener('click', () => showAnswer(index));
+    questionsContainer.appendChild(bubble);
   });
-  
-  // Injecter dans le popup
-  tasksList.innerHTML = formattedTasks.join('');
-  
-  // Afficher le popup
-  tasksPopup.classList.remove('hidden');
-  
-  // Animation du maire
-  mayorGif.src = 'maire-speak.gif';
-  setTimeout(() => {
-    mayorGif.src = 'maire-silent.gif';
-  }, 2000);
-}
-// Fermer le popup
-closePopupBtn.addEventListener('click', () => {
-  tasksPopup.classList.add('hidden');
+
+  // Fonction pour afficher les réponses
+  function showAnswer(index) {
+    mayorGif.src = 'maire-speak.gif';
+    responseBubble.classList.remove('hidden');
+    
+    if (seul[index]) {
+      responseContent.innerHTML = 'Je regrette mais tu es capable de répondre à cette question par toi même.';
+    } else if (index === 1) {
+      responseContent.innerHTML = `
+        <p>${answers[index]}</p>
+        <button class="show-tasks-btn">Voir la liste complète des tâches</button>
+      `;
+      document.querySelector('.show-tasks-btn').addEventListener('click', showTasks);
+    } else {
+      responseContent.innerHTML = answers[index].replace(/<br>/g, '<br>');
+    }
+
+    setTimeout(() => {
+      mayorGif.src = 'maire-silent.gif';
+      responseBubble.classList.add('hidden');
+    }, 5000);
+  }
+
+  // Fonction pour afficher le popup des tâches
+  function showTasks() {
+    tasksList.innerHTML = tasks.map(task => 
+      `<li>${task.replace(/<br>/g, '<br>')}</li>`
+    ).join('');
+    
+    tasksPopup.classList.add('active');
+    mayorGif.src = 'maire-speak.gif';
+    
+    setTimeout(() => {
+      mayorGif.src = 'maire-silent.gif';
+    }, 2000);
+  }
+
+  // Fermer le popup
+  closePopupBtn.addEventListener('click', () => {
+    tasksPopup.classList.remove('active');
+  });
+
+  // Fermer en cliquant à l'extérieur
+  tasksPopup.addEventListener('click', (e) => {
+    if (e.target === tasksPopup) {
+      tasksPopup.classList.remove('active');
+    }
+  });
 });
+
+const seul = [true, false, false, false, false, false, false, false, false, false];
