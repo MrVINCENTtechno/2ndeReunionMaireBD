@@ -80,7 +80,7 @@ function showTasks() {
   dialogueBox.innerHTML = `
     <p><strong>Liste des tâches :</strong></p>
     <ul>
-      ${tasks.map(task => `${task}`).join('')}
+      ${tasks.map(task => <li>`${task}`</li>).join('')}
     </ul>
   `;
 }
