@@ -58,7 +58,6 @@ questions.forEach((question, index) => {
 });
 
 // ... (conserve les mêmes données questions/answers/tasks)
-
 function showAnswer(index) {
   // Démarrer l'animation
   const mayorGif = document.getElementById('mayor-gif');
@@ -66,9 +65,12 @@ function showAnswer(index) {
   
   // Afficher la réponse
   if (index === 1) {
-    dialogueBox.innerHTML = `<p><strong>Réponse :</strong> ${answers[index]}</p>
-            <button class="show-tasks-btn">Voir la liste complète des tâches</button>`;
-    document.querySelector('.show-tasks-btn').addEventListener('click', showTasks);
+    dialogueBox.innerHTML = `
+    <p><strong>Réponse :</strong> ${answers[index]}</p>
+    <button class="show-tasks-btn">Voir la liste complète des tâches</button>
+  `;
+  // Réattacher l'événement à chaque clic
+  document.querySelector('.show-tasks-btn').addEventListener('click', showTasks);
   } else {
     dialogueBox.innerHTML = `<p><strong>Réponse :</strong> ${answers[index]}</p>`;
   }
@@ -79,32 +81,27 @@ function showAnswer(index) {
   }, 8000);
 }
 
-// ... (conserve showTasks() inchangé)
-/*
-function showTasks() {
-  dialogueBox.innerHTML = `
-    <p><strong>Liste des tâches :</strong></p>
-    <ul>
-      ${tasks.map(task => <li>`${task}`</li>).join('')}
-    </ul>
-  `;
-}
-*/
 // Fonction pour afficher les tâches dans le popup
 function showTasks() {
-  // Remplir la liste
-  tasksList.innerHTML = tasks.map(task => `<li>${task}</li>`).join('');
+  // Formatage des tâches avec gestion des <br>
+  const formattedTasks = tasks.map(task => {
+    // Remplacer <br> par des sauts de ligne réels
+    const taskText = task.replace(/<br>/gi, '\n');
+    return `<li>${taskText}</li>`;
+  });
+  
+  // Injecter dans le popup
+  tasksList.innerHTML = formattedTasks.join('');
   
   // Afficher le popup
   tasksPopup.classList.remove('hidden');
   
-  // Mettre à jour le GIF du maire
+  // Animation du maire
   mayorGif.src = 'maire-speak.gif';
   setTimeout(() => {
     mayorGif.src = 'maire-silent.gif';
   }, 2000);
 }
-
 // Fermer le popup
 closePopupBtn.addEventListener('click', () => {
   tasksPopup.classList.add('hidden');
