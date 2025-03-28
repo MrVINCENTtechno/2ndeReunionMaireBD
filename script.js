@@ -66,10 +66,11 @@ function showAnswer(index) {
   
   // Afficher la réponse
   if (index === 1) {
-    dialogueBox.innerHTML = `
-      <p><strong>Réponse :</strong> ${answers[index]}</p>
-      <button class="task-btn" onclick="showTasks()">Voir détails des tâches</button>
+    responseContent.innerHTML = `
+      <p>${answers[index]}</p>
+      <button class="show-tasks-btn">Voir la liste complète des tâches</button>
     `;
+    document.querySelector('.show-tasks-btn').addEventListener('click', showTasks);
   } else {
     dialogueBox.innerHTML = `<p><strong>Réponse :</strong> ${answers[index]}</p>`;
   }
