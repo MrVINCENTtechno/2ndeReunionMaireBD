@@ -17,7 +17,7 @@ const answers = [
   "(1)Réunion, (2)Ébauche, (3)Plan, (4)Vérification, (5)Présentation, (6)Réunion, (7)Choix terrain, (8)3D, (9)Réunion finale",
   "Je regrette mais tu es capable de répondre à cette question par toi même",
   "Aucun travaux de construction. Seulement imaginer le projet et réaliser des représentations (plans, vue 3D, maquettes etc..)",
-  "les dimensions d'un conteneurs<br>ce que le logement et la résidence doivent avoir et comment tout doit fonctionner<br>les outils informatiques et le materiel nécessaires",
+  "les dimensions d'un conteneur<br>ce que le logement et la résidence doivent avoir et comment tout doit fonctionner<br>les outils informatiques et le materiel nécessaires",
   "OUI !!! Le maire nous donnera les détails supplémentaires pendant les réunions.",
   "9 tâches",
   "Je regrette mais tu es capable de répondre à cette question par toi même",
